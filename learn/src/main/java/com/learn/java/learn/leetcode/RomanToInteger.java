@@ -43,10 +43,36 @@ public class RomanToInteger {
         return result;
     }
 
+    public static int romanToInt1(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
+
+        Character pre = s.charAt(0);
+        int result = map.get(pre);
+
+        for (int i = 1; i < s.length(); i++) {
+            char curr = s.charAt(i);
+            if(map.get(pre)<map.get(curr)){
+                result -=  (map.get(curr) - map.get(pre));
+            }else{
+                result += map.get(curr);
+            }
+            pre = curr;
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
-        System.out.println(romanToInt("III"));
+        /*System.out.println(romanToInt("III"));
         System.out.println(romanToInt("IV"));
-        System.out.println(romanToInt("VI"));
+        System.out.println(romanToInt("VI"));*/
+        System.out.println(romanToInt1("MCMXCIV"));
     }
 
 }
